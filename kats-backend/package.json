@@ -1,0 +1,16 @@
+{
+  "name": "kats-backend",
+  "version": "1.0.0",
+  "description": "Kritos Awesome Talk Service Backend",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kritomas",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}

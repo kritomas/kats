@@ -1,1 +1,1 @@
-# Kritos Amazing Talk Service
+# Kritos Awesome Talk Service
