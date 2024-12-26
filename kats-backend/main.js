@@ -7,6 +7,8 @@ const server = express();
 
 server.use(cors());
 
+server.use(express.static("../kats-frontend/dist"));
+
 server.listen(PORT, () =>
 {
 	console.log("Kats backend listening at " + PORT);
