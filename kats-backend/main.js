@@ -3,13 +3,13 @@ import cors from "cors";
 
 const PORT = 42069;
 
-const server = express();
+const app = express();
 
-server.use(cors());
+app.use(cors());
 
-server.use(express.static("../kats-frontend/dist"));
+app.use(express.static("../kats-frontend/dist"));
 
-server.listen(PORT, () =>
+app.listen(PORT, () =>
 {
 	console.log("Kats backend listening at " + PORT);
 });
