@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 
+import {createUser, getUser} from "./database.js";
+
 const PORT = 42069;
 
 const app = express();
