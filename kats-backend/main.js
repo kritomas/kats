@@ -10,8 +10,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(express.static("../kats-frontend/dist"));
-
 app.put("/api/user", async (req, res, next) =>
 {
 	try
@@ -41,6 +39,16 @@ app.post("/api/user", async (req, res, next) =>
 		next(e);
 	}
 });
+
+app.use(express.static("../kats-frontend/dist"));
+
+/* // TODO: Necessary for react routes to work correctly, but needs absolute paths to work.
+app.use(express.static("/var/kats/kats-frontend/dist"));
+
+app.get('*', (req, res) =>
+{
+	res.sendFile("/var/kats/kats-frontend/dist/index.html");
+});*/
 
 app.listen(PORT, () =>
 {
