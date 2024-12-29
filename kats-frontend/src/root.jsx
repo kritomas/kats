@@ -4,6 +4,12 @@ import Footer from "./footer";
 
 function Root()
 {
+	if (sessionStorage.userid === undefined)
+	{
+		window.location.replace("/login");
+		return;
+	}
+
 	return (
 		<body>
 			<Header/>
