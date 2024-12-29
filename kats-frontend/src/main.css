@@ -9,6 +9,13 @@ body {
 	flex-direction: column;
 	height: 100vh;
 }
+.body {
+	padding: 0px;
+	margin: 0px;
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
 
 main {
 	flex-grow: 1;

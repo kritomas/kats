@@ -1,8 +1,11 @@
+import { useNavigate, Link } from "react-router";
 import "./main.css";
 import "./login.css";
 
 function Login()
 {
+	const navigate = useNavigate();
+
 	async function handleLogin(event)
 	{
 		event.preventDefault();
@@ -17,7 +20,7 @@ function Login()
 		const body = await response.json();
 		sessionStorage.userid = body.id;
 		sessionStorage.username = body.username;
-		window.location.replace("/");
+		navigate("/");
 	}
 
 	return (
@@ -32,7 +35,7 @@ function Login()
 				<br/>
 				<button type="submit">Submit</button>
 			</form>
-			<a href="/register">Register</a>
+			<Link to="/register">Register</Link>
 		</div>
 	);
 }

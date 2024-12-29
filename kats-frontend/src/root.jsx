@@ -1,23 +1,30 @@
+import { useNavigate } from "react-router";
+import { useEffect } from "react";
 import "./main.css";
 import Header from "./header";
 import Footer from "./footer";
 
 function Root()
 {
-	if (sessionStorage.userid === undefined)
+	const navigate = useNavigate();
+
+	useEffect(() =>
 	{
-		window.location.replace("/login");
-		return;
-	}
+		if (sessionStorage.userid === undefined)
+		{
+			navigate("/login");
+			return;
+		}
+	});
 
 	return (
-		<body>
+		<div className="body-div">
 			<Header/>
 			<main>
 				 BRYNDZOVÉ HALUŠKY
 			</main>
 			<Footer/>
-		</body>
+		</div>
 	);
 }
 

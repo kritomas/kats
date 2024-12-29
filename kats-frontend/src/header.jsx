@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import "./main.css";
 import "./header.css";
 
@@ -5,8 +6,8 @@ function Header()
 {
 	return (
 		<header>
-			<a href="/login">Login</a>
-			<a href="/register">Register</a>
+			<Link to="/login">Login</Link>
+			<Link to="/register">Register</Link>
 		</header>
 	);
 }
