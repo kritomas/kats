@@ -25,10 +25,10 @@ export async function createUser(username, password)
 	return await getUser(username, password);
 }
 
-export async function createRoom(is_public = true)
+export async function createRoom(owner_id, is_public = true)
 {
 	const id = uuidv4();
-	const result = await pool.query("insert into Room (id, is_public) values (?, ?);", [id, is_public]);
+	const result = await pool.query("insert into Room (id, Owner_id, is_public) values (?, ?, ?);", [id, owner_id, is_public]);
 	return await getRoom(id);
 }
 export async function getRoom(room_id)
@@ -39,7 +39,18 @@ export async function getRoom(room_id)
 }
 export async function getAllRooms(user_id)
 {
-	let result = await pool.query("select Room.id from Room left join Whitelist on Room.id = Whitelist.Room_id and Whitelist.User_id = ? where Whitelist.id is not null or Room.is_public;", [user_id]);
+	let result = await pool.query("select Room.id from Room left join Whitelist on Room.id = Whitelist.Room_id and Whitelist.User_id = ? where Whitelist.id is not null or Room.is_public or Room.Owner_id = ?;", [user_id, user_id]);
 	const rows = result[0];
 	return rows;
+}
+
+export async function createWhitelist(username, room_id, owner_id)
+{
+	const result = await pool.query("insert into Whitelist (User_id, Room_id) select (select id from User where username = ?), (select id from Room where id = ? and Owner_id = ?);", [username, room_id, owner_id]);
+	return result[0].affectedRows;
+}
+export async function removeWhitelist(username, room_id, owner_id)
+{
+	const result = await pool.query("delete Whitelist from Whitelist inner join Room on Whitelist.Room_id = Post.id inner join User on User.id = Whitelist.User_id where Whitelist.Room_id = ? and User.username = ? and Room.Owner_id = ?;", [room_id, username, owner_id]);
+	return result[0].affectedRows;
 }

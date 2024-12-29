@@ -8,7 +8,10 @@ create table User
 create table Room
 (
 	id varchar(36) primary key default UUID(),
-	is_public bit not null
+	Owner_id varchar(36) not null,
+	is_public bit not null,
+
+	foreign key (OWner_id) references User(id) on delete cascade
 );
 
 create table Message
