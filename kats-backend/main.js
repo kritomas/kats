@@ -1,7 +1,9 @@
 import express from "express";
 import cors from "cors";
 
-import {createUser, getUser} from "./database.js";
+import {createUser, getUser,
+        createRoom, getRoom, getAllRooms,
+        createWhitelist, removeWhitelist} from "./database.js";
 
 const PORT = 42069;
 
@@ -24,7 +26,6 @@ app.put("/api/user", async (req, res, next) =>
 		next(e);
 	}
 });
-
 app.post("/api/user", async (req, res, next) =>
 {
 	try
@@ -33,6 +34,21 @@ app.post("/api/user", async (req, res, next) =>
 		const user = await createUser(username, password);
 		if (user === undefined) res.status(404).send("Not found");
 		else res.status(201).send(user);
+	}
+	catch (e)
+	{
+		next(e);
+	}
+});
+
+app.put("/api/room", async (req, res, next) =>
+{
+	try
+	{
+		const {user_id} = req.body;
+		const rooms = await getAllRooms(user_id);
+		if (rooms === undefined) res.status(404).send("Not found");
+		else res.status(200).send(rooms);
 	}
 	catch (e)
 	{

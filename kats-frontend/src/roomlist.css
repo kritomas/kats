@@ -1,0 +1,9 @@
+.roomlist {
+	margin: 5px;
+}
+
+.room-tile {
+	padding: 5px;
+	margin: 5px;
+	background-color: #f4abd7;
+}

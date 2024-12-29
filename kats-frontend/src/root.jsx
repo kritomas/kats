@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import "./main.css";
 import Header from "./header";
 import Footer from "./footer";
+import RoomList from "./roomlist";
 
 function Root()
 {
@@ -17,11 +18,21 @@ function Root()
 		}
 	});
 
+	let roomlist;
+	if (sessionStorage.userid === undefined)
+	{
+		roomlist = <div/>
+	}
+	else
+	{
+		roomlist = <RoomList/>
+	}
+
 	return (
 		<div className="body-div">
 			<Header/>
 			<main>
-				 BRYNDZOVÉ HALUŠKY
+				 {roomlist}
 			</main>
 			<Footer/>
 		</div>
