@@ -25,7 +25,7 @@ function RoomList()
 				return (
 					<div className="room-tile">
 						<p>Room <b>{val.id}</b></p>
-						<Link>Enter</Link> /*TODO*/
+						<Link to={"/chat?chat=" + val.id}>Enter</Link>
 					</div>
 				);
 			});
