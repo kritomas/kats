@@ -19,7 +19,7 @@ create table Message
 	id integer primary key auto_increment,
 	Sender_id varchar(36) not null,
 	Room_id varchar(36) not null,
-	creation_date date not null default now(),
+	creation_date datetime not null default now(),
 	message text not null,
 
 	foreign key (Sender_id) references User(id) on delete cascade,

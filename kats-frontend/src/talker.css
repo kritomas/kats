@@ -1,0 +1,9 @@
+.message-list {
+	margin: 5px;
+}
+
+.message {
+	padding: 5px;
+	margin: 5px;
+	background-color: #f4abd7;
+}

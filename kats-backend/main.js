@@ -5,8 +5,9 @@ import http from "http";
 
 import {createUser, getUser,
         createRoom, getRoom, getAllRooms,
-        createWhitelist, removeWhitelist,
-        createMessage} from "./database.js";
+        createWhitelist, removeWhitelist} from "./database.js";
+
+import {createTalker} from "./chatman.js";
 
 const PORT = 42069;
 
@@ -80,9 +81,9 @@ io.on("connection", (socket) =>
 		console.log("Talker disconnected: " + socket.id);
 	});
 
-	socket.on("COMM_ENTER", (user) =>
+	socket.on("COMM_ENTER", (talker) =>
 	{
-		console.log(user);
+		createTalker(socket, talker);
 	});
 });
 

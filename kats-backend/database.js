@@ -60,3 +60,9 @@ export async function createMessage(sender_id, room_id, text)
 	const result = await pool.query("insert into Message (Sender_id, Room_id, message) values (?, ?, ?);", [sender_id, room_id, text]);
 	return result[0].affectedRows;
 }
+export async function listMessages(room_id)
+{
+	const result = await pool.query("select User.username as user, Message.message as message, Message.creation_date as date from Message inner join User on User.id = Message.Sender_id where Message.Room_id = ? order by creation_date asc;", [room_id]);
+	const rows = result[0];
+	return rows;
+}
