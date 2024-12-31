@@ -1,13 +1,18 @@
 import express from "express";
 import cors from "cors";
+import { Server } from "socket.io";
+import http from "http";
 
 import {createUser, getUser,
         createRoom, getRoom, getAllRooms,
-        createWhitelist, removeWhitelist} from "./database.js";
+        createWhitelist, removeWhitelist,
+        createMessage} from "./database.js";
 
 const PORT = 42069;
 
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
 
 app.use(cors());
 app.use(express.json());
@@ -66,7 +71,22 @@ app.get('*', (req, res) =>
 	res.sendFile("/var/kats/kats-frontend/dist/index.html");
 });*/
 
-app.listen(PORT, () =>
+io.on("connection", (socket) =>
+{
+	console.log("Talker connected: " + socket.id);
+
+	socket.on("disconnect", () =>
+	{
+		console.log("Talker disconnected: " + socket.id);
+	});
+
+	socket.on("COMM_ENTER", (user) =>
+	{
+		console.log(user);
+	});
+});
+
+server.listen(PORT, () =>
 {
 	console.log("Kats backend listening at " + PORT);
 });
