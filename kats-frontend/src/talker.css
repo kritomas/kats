@@ -7,3 +7,14 @@
 	margin: 5px;
 	background-color: #f4abd7;
 }
+
+form {
+	padding: 5px;
+	margin: 10px;
+	background-color: #f4abd7;
+	width: 95vw;
+}
+
+.message-prompt {
+	width: 95%;
+}

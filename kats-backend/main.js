@@ -3,11 +3,11 @@ import cors from "cors";
 import { Server } from "socket.io";
 import http from "http";
 
-import {createUser, getUser,
-        createRoom, getRoom, getAllRooms,
-        createWhitelist, removeWhitelist} from "./database.js";
+import { createUser, getUser,
+         createRoom, getRoom, getAllRooms,
+         createWhitelist, removeWhitelist } from "./database.js";
 
-import {createTalker} from "./chatman.js";
+import { createTalker, registerMessage, removeTalker } from "./chatman.js";
 
 const PORT = 42069;
 
@@ -78,12 +78,17 @@ io.on("connection", (socket) =>
 
 	socket.on("disconnect", () =>
 	{
+		removeTalker(socket);
 		console.log("Talker disconnected: " + socket.id);
 	});
 
 	socket.on("COMM_ENTER", (talker) =>
 	{
 		createTalker(socket, talker);
+	});
+	socket.on("COMM_SEND", (message) =>
+	{
+		registerMessage(socket, message);
 	});
 });
 
