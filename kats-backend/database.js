@@ -39,7 +39,7 @@ export async function getRoom(room_id)
 }
 export async function getAllRooms(user_id)
 {
-	let result = await pool.query("select Room.id from Room left join Whitelist on Room.id = Whitelist.Room_id and Whitelist.User_id = ? where Whitelist.id is not null or Room.is_public or Room.Owner_id = ?;", [user_id, user_id]);
+	let result = await pool.query("select distinct Room.id from Room left join Whitelist on Room.id = Whitelist.Room_id and Whitelist.User_id = ? where Whitelist.id is not null or Room.is_public or Room.Owner_id = ?;", [user_id, user_id]);
 	const rows = result[0];
 	return rows;
 }
