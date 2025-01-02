@@ -105,15 +105,12 @@ app.delete("/api/whitelist", async (req, res, next) =>
 	}
 });
 
-app.use(express.static("../kats-frontend/dist"));
-
-/* // TODO: Necessary for react routes to work correctly, but needs absolute paths to work.
 app.use(express.static("/var/kats/kats-frontend/dist"));
 
 app.get('*', (req, res) =>
 {
 	res.sendFile("/var/kats/kats-frontend/dist/index.html");
-});*/
+});
 
 io.on("connection", (socket) =>
 {

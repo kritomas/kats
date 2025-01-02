@@ -1,0 +1,9 @@
+[Unit]
+Description=Kritos Awesome Talk Service Service
+
+[Service]
+Type=simple
+ExecStart=/var/kats/kats-backend/start-server.sh
+
+[Install]
+WantedBy=multi-user.target

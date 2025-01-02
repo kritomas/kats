@@ -3,7 +3,7 @@ import mysql from "mysql2";
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 
-const pool = mysql.createPool(JSON.parse(fs.readFileSync("./sql_credentials.json", "utf8"))).promise();
+const pool = mysql.createPool(JSON.parse(fs.readFileSync("/var/kats/kats-backend/sql_credentials.json", "utf8"))).promise();
 
 export async function getUser(username, password)
 {
