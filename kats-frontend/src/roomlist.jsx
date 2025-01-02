@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import "./main.css";
 import "./roomlist.css";
-import { routeToRoom, routeToCreateWhitelist } from "./util.js";
+import { routeToRoom, routeToCreateWhitelist, routeToRemoveWhitelist } from "./util.js";
 
 function RoomList()
 {
@@ -25,12 +25,14 @@ function RoomList()
 			{
 				let roomRoute = routeToRoom(val.id);
 				let createWhitelistRoute = routeToCreateWhitelist(val.id);
+				let removeWhitelistRoute = routeToRemoveWhitelist(val.id);
 
 				return (
 					<div className="room-tile">
 						<p>Room <b>{val.id}</b></p>
 						<Link to={roomRoute}>Enter</Link>
 						<Link to={createWhitelistRoute}>Add Whitelist</Link>
+						<Link to={removeWhitelistRoute}>Remove Whitelist</Link>
 					</div>
 				);
 			});

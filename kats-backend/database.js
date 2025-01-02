@@ -51,7 +51,7 @@ export async function createWhitelist(username, room_id, owner_id)
 }
 export async function removeWhitelist(username, room_id, owner_id)
 {
-	const result = await pool.query("delete Whitelist from Whitelist inner join Room on Whitelist.Room_id = Post.id inner join User on User.id = Whitelist.User_id where Whitelist.Room_id = ? and User.username = ? and Room.Owner_id = ?;", [room_id, username, owner_id]);
+	const result = await pool.query("delete Whitelist from Whitelist inner join Room on Whitelist.Room_id = Room.id inner join User on User.id = Whitelist.User_id where Whitelist.Room_id = ? and User.username = ? and Room.Owner_id = ?;", [room_id, username, owner_id]);
 	return result[0].affectedRows;
 }
 

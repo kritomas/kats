@@ -1,12 +1,12 @@
 import { useNavigate, Link } from "react-router";
 import "./main.css";
-import "./createwhitelist.css";
+import "./removewhitelist.css";
 
-function CreateWhitelist()
+function RemoveWhitelist()
 {
 	const navigate = useNavigate();
 
-	async function handleCreateWhitelist(event)
+	async function handleRemoveWhitelist(event)
 	{
 		event.preventDefault();
 		const urlParams = new URL(window.location.toLocaleString()).searchParams;
@@ -17,7 +17,7 @@ function CreateWhitelist()
 		data["user_id"] = sessionStorage.userid;
 		const response = await fetch("/api/whitelist",
 		{
-			method: "POST",
+			method: "DELETE",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(data)
 		});
@@ -26,8 +26,8 @@ function CreateWhitelist()
 
 	return (
 		<div className="form-div">
-			<h2>KATS - Add User To Whitelist</h2>
-			<form id="createwhitelist-form" onSubmit={handleCreateWhitelist}>
+			<h2>KATS - Remove User From Whitelist</h2>
+			<form id="removewhitelist-form" onSubmit={handleRemoveWhitelist}>
 				<label>Username:</label>
 				<input type="text" id="username" name="username" required/>
 				<br/>
@@ -37,4 +37,4 @@ function CreateWhitelist()
 	);
 }
 
-export default CreateWhitelist;
+export default RemoveWhitelist;
