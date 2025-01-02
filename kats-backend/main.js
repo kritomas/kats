@@ -76,6 +76,35 @@ app.post("/api/room", async (req, res, next) =>
 	}
 });
 
+app.post("/api/whitelist", async (req, res, next) =>
+{
+	try
+	{
+		const {username, room_id, user_id} = req.body;
+		const affected = await createWhitelist(username, room_id, user_id);
+		if (affected > 0) res.status(201).send("");
+		else res.status(404).send("Not found");
+	}
+	catch (e)
+	{
+		next(e);
+	}
+});
+app.delete("/api/whitelist", async (req, res, next) =>
+{
+	try
+	{
+		const {username, room_id, user_id} = req.body;
+		const affected = await removeWhitelist(username, room_id, user_id);
+		if (affected > 0) res.status(200).send("");
+		else res.status(404).send("Not found");
+	}
+	catch (e)
+	{
+		next(e);
+	}
+});
+
 app.use(express.static("../kats-frontend/dist"));
 
 /* // TODO: Necessary for react routes to work correctly, but needs absolute paths to work.

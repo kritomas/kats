@@ -17,7 +17,7 @@ function Root()
 			navigate("/login");
 			return;
 		}
-	});
+	}, []);
 
 	let roomlist;
 	if (sessionStorage.userid === undefined)

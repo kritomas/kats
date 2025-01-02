@@ -5,6 +5,7 @@ import Login from "./login";
 import Register from "./register";
 import Chat from "./chat";
 import CreateRoom from "./createroom";
+import CreateWhitelist from "./createwhitelist";
 
 function App()
 {
@@ -16,6 +17,7 @@ function App()
 				<Route path="/register" element={<Register/>} />
 				<Route path="/chat" element={<Chat/>} />
 				<Route path="/createroom" element={<CreateRoom/>} />
+				<Route path="/createwhitelist" element={<CreateWhitelist/>} />
 			</Routes>
 		</Router>
 	);
