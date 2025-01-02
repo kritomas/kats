@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import "./main.css";
 import "./roomlist.css";
+import { routeToRoom } from "./util.js";
 
 function RoomList()
 {
@@ -22,10 +23,12 @@ function RoomList()
 
 			const rooms = body.map((val) =>
 			{
+				let roomRoute = routeToRoom(val.id);
+
 				return (
 					<div className="room-tile">
 						<p>Room <b>{val.id}</b></p>
-						<Link to={"/chat?chat=" + val.id}>Enter</Link>
+						<Link to={roomRoute}>Enter</Link>
 					</div>
 				);
 			});

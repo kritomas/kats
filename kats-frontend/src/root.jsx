@@ -1,6 +1,7 @@
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import { useEffect } from "react";
 import "./main.css";
+import "./root.css";
 import Header from "./header";
 import Footer from "./footer";
 import RoomList from "./roomlist";
@@ -32,7 +33,10 @@ function Root()
 		<div className="body-div">
 			<Header/>
 			<main>
-				 {roomlist}
+				<div className="roomcreate-ribbon">
+					<Link to="/createroom">Create Room</Link>
+				</div>
+				{roomlist}
 			</main>
 			<Footer/>
 		</div>

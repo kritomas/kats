@@ -35,7 +35,7 @@ export async function getRoom(room_id)
 {
 	let result = await pool.query("select Room.id from Room where id = ?;", [room_id]);
 	const rows = result[0];
-	return rows;
+	return rows[0];
 }
 export async function getAllRooms(user_id)
 {

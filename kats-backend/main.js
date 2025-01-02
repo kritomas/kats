@@ -61,6 +61,20 @@ app.put("/api/room", async (req, res, next) =>
 		next(e);
 	}
 });
+app.post("/api/room", async (req, res, next) =>
+{
+	try
+	{
+		const {user_id, is_public} = req.body;
+		const room = await createRoom(user_id, is_public);
+		if (room === undefined) res.status(404).send("Not found");
+		else res.status(201).send(room);
+	}
+	catch (e)
+	{
+		next(e);
+	}
+});
 
 app.use(express.static("../kats-frontend/dist"));
 

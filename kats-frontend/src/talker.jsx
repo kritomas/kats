@@ -50,7 +50,7 @@ function Talker({chatId})
 		<div className="chat">
 			{messageView}
 			<div className="prompt-div">
-				<form onSubmit={handleSend}>
+				<form className="prompt" onSubmit={handleSend}>
 					<input type="text" id="message" className="message-prompt" name="message" required/>
 					<br/>
 					<button type="submit">Submit</button>
