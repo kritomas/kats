@@ -11,16 +11,24 @@ function Login()
 		event.preventDefault();
 		const form = new FormData(event.target);
 		const data = Object.fromEntries(form.entries());
-		const response = await fetch("/api/user",
+		try
 		{
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(data)
-		});
-		const body = await response.json();
-		sessionStorage.userid = body.id;
-		sessionStorage.username = body.username;
-		navigate("/");
+			const response = await fetch("/api/user",
+			{
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(data)
+			});
+			const body = await response.json();
+			sessionStorage.userid = body.id;
+			sessionStorage.username = body.username;
+			navigate("/");
+		}
+		catch (error)
+		{
+			navigate("/error");
+			throw error;
+		}
 	}
 
 	return (

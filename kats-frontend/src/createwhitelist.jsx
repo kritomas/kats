@@ -15,13 +15,22 @@ function CreateWhitelist()
 		let data = Object.fromEntries(form.entries());
 		data["room_id"] = room;
 		data["user_id"] = sessionStorage.userid;
-		const response = await fetch("/api/whitelist",
+		try
 		{
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(data)
-		});
-		navigate("/");
+			const response = await fetch("/api/whitelist",
+			{
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(data)
+			});
+			if (!response.ok) throw response;
+			navigate("/");
+		}
+		catch (error)
+		{
+			navigate("/error");
+			throw error;
+		}
 	}
 
 	return (

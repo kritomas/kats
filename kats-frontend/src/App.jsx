@@ -8,6 +8,7 @@ import Chat from "./chat";
 import CreateRoom from "./createroom";
 import CreateWhitelist from "./createwhitelist";
 import RemoveWhitelist from "./removewhitelist";
+import Error from "./error";
 
 function App()
 {
@@ -22,6 +23,7 @@ function App()
 				<Route path="/createroom" element={<CreateRoom/>} />
 				<Route path="/createwhitelist" element={<CreateWhitelist/>} />
 				<Route path="/removewhitelist" element={<RemoveWhitelist/>} />
+				<Route path="/error" element={<Error/>} />
 			</Routes>
 		</Router>
 	);

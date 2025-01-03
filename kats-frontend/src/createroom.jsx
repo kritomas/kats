@@ -14,14 +14,22 @@ function CreateRoom()
 		let data = Object.fromEntries(form.entries());
 		data["is_public"] = (data["is_public"] !== undefined);
 		data["user_id"] = sessionStorage.userid;
-		const response = await fetch("/api/room",
+		try
 		{
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(data)
-		});
-		const body = await response.json();
-		navigate(routeToRoom(body.id));
+			const response = await fetch("/api/room",
+			{
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(data)
+			});
+			const body = await response.json();
+			navigate(routeToRoom(body.id));
+		}
+		catch (error)
+		{
+			navigate("/error");
+			throw error;
+		}
 	}
 
 	return (
