@@ -66,3 +66,16 @@ export async function listMessages(room_id)
 	const rows = result[0];
 	return rows;
 }
+
+export async function listMessagesBulk(user_id, author_name)
+{
+	if (author_name === undefined)
+	{
+		const result = await pool.query("select User.username as user, Message.message as message, Message.creation_date as date, Message.room_id as room_id from Message inner join User on User.id = Message.Sender_id where Message.Room_id in (select distinct Room.id from Room left join Whitelist on Room.id = Whitelist.Room_id and Whitelist.User_id = ? where Whitelist.id is not null or Room.is_public or Room.Owner_id = ?) order by creation_date asc;", [user_id, user_id]);
+		const rows = result[0];
+		return rows;
+	}
+	const result = await pool.query("select User.username as user, Message.message as message, Message.creation_date as date, Message.room_id as room_id from Message inner join User on User.id = Message.Sender_id where Message.Room_id in (select distinct Room.id from Room left join Whitelist on Room.id = Whitelist.Room_id and Whitelist.User_id = ? where Whitelist.id is not null or Room.is_public or Room.Owner_id = ?) and User.username = ? order by creation_date asc;", [user_id, user_id, author_name]);
+	const rows = result[0];
+	return rows;
+}

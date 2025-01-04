@@ -5,7 +5,8 @@ import http from "http";
 
 import { createUser, getUser,
          createRoom, getRoom, getAllRooms,
-         createWhitelist, removeWhitelist } from "./database.js";
+         createWhitelist, removeWhitelist,
+         listMessages, listMessagesBulk } from "./database.js";
 
 import { createTalker, registerMessage, removeTalker } from "./chatman.js";
 
@@ -75,6 +76,23 @@ app.post("/api/room", async (req, res, next) =>
 		next(e);
 	}
 });
+app.get("/api/room/:room_id", async (req, res, next) =>
+{
+	try
+	{
+		const {room_id} = req.params;
+		if (await getRoom(room_id) === undefined) res.status(404).send("Not found");
+		else
+		{
+			const messages = await listMessages(room_id);
+			res.status(200).send(messages);
+		}
+	}
+	catch (e)
+	{
+		next(e);
+	}
+});
 
 app.post("/api/whitelist", async (req, res, next) =>
 {
@@ -98,6 +116,21 @@ app.delete("/api/whitelist", async (req, res, next) =>
 		const affected = await removeWhitelist(username, room_id, user_id);
 		if (affected > 0) res.status(200).send("");
 		else res.status(404).send("Not found");
+	}
+	catch (e)
+	{
+		next(e);
+	}
+});
+
+app.put("/api/message", async (req, res, next) =>
+{
+	try
+	{
+		const {user_id, written_by} = req.body;
+		const messages = await listMessagesBulk(user_id, written_by);
+		if (messages === undefined) res.status(404).send("Not found");
+		else res.status(200).send(messages);
 	}
 	catch (e)
 	{
